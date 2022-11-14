@@ -8,6 +8,7 @@ const GlobalStyle = createGlobalStyle`
   background-color: #000A1F;
   color: white;
   font-family: 'Be Vietnam Pro', sans-serif;
+  scroll-behavior: smooth;
   }
 
   a {

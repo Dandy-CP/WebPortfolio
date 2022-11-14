@@ -42,7 +42,7 @@ export const HeadingText = styled.h2`
     border-top: 4px solid #00c7ff;
     display: block;
     height: 4px;
-    width: 140%;
+    width: 165%;
   }
 
   @media screen and (min-width: 767px) and (max-width: 1023px) {
@@ -117,8 +117,10 @@ export const EndSection = styled.div`
   align-items: center;
   margin-top: 100px;
   margin-bottom: 100px;
+  z-index: 1;
 
   h1 {
+    font-size: 3rem;
     margin-top: 50px;
   }
 
@@ -141,6 +143,7 @@ export const ButtonEmail = styled.button`
   border: 3px solid white;
   border-radius: 50px;
   cursor: pointer;
+  transition: 0.5s ease-in-out;
 
   &:hover {
     border: 3px solid #00c7ff;
@@ -159,6 +162,7 @@ export const OrnamentImage = styled.div`
   /*  width: 100%; */
   margin-top: 500px;
   height: 50%;
+  z-index: -1;
 
   @media screen and (max-width: 766px) {
     margin-top: 400px;

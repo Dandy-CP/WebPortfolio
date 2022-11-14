@@ -14,7 +14,6 @@ const SetMyProjects = () => {
       if (data) {
         dispatch(GetProjects(data));
         dispatch(ShowLoading(false));
-        console.log(data);
       }
     };
     FetchMyProject();

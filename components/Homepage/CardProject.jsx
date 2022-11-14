@@ -1,7 +1,8 @@
-import Image from 'next/image';
-import Link from 'next/link';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+
+import Image from 'next/image';
+import Link from 'next/link';
 
 import SetCardProjects from '../../config/redux/action/fetchDataCardProjects';
 import ExternalLink from '../../public/images/Icon/external-link.svg';
@@ -34,7 +35,14 @@ const CardProject = () => {
         {CardProjects.slice(0, 3).map((data) => (
           <Card key={data.id}>
             <CardImageBox>
-              <Image src={data.cover} alt="project" width={400} height={250} />
+              <a href={data.DemoLink} target="_blank" rel="noreferrer">
+                <Image
+                  src={data.cover}
+                  alt="project"
+                  width={400}
+                  height={250}
+                />
+              </a>
             </CardImageBox>
             <ProjectDescription>
               <h3>

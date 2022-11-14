@@ -1,13 +1,24 @@
-import parse from 'html-react-parser';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+
+import Head from 'next/head';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react';
 
-import supabase from '../../config/supabaseClient';
+import { DiscussionEmbed } from 'disqus-react';
+import parse from 'html-react-parser';
+import Prism from 'prismjs';
+import 'prismjs/components/prism-css';
+import 'prismjs/components/prism-javascript';
+import 'prismjs/components/prism-jsx';
+
+import ContentBlogSkeleton from '../../components/ContentBlogSkeleton';
+import SetBlogContent from '../../config/redux/action/fetchBlogContent';
 import AuthorImg from '../../public/Author.jpg';
 import {
   ArticleContent,
   AuthorArticle,
+  DisqusContainer,
   PostContent,
   ThumbnailImage,
   TitleArticle,
@@ -15,35 +26,39 @@ import {
 import { MainContainer } from '../../styles/GlobalStyle';
 
 const BlogArticle = () => {
-  const [getContent, setGetContent] = useState([]);
+  const { BlogContent, IsLoading } = useSelector((state) => state.BlogContent);
+  const dispatch = useDispatch();
   const router = useRouter();
+  const { asPath } = useRouter();
   const { titleBlog } = router.query;
+
+  const origin =
+    typeof window !== 'undefined' && window.location.origin
+      ? window.location.origin
+      : '';
+
+  const URL = `${origin}${asPath}`;
 
   const getTitleBlog = titleBlog ? titleBlog.replace(/-/g, ' ') : '';
 
   useEffect(() => {
-    const fetchContent = async () => {
-      const { data, error } = await supabase
-        .from('BlogContentPost')
-        .select()
-        .eq('titlePost', `${getTitleBlog}`);
+    dispatch(SetBlogContent(`${getTitleBlog}`));
 
-      if (error) {
-        console.log(error);
-      }
-
-      if (data) {
-        setGetContent(data);
-      }
-    };
-
-    fetchContent();
-  }, [getTitleBlog]);
+    setTimeout(() => {
+      Prism.highlightAll();
+    }, 3000);
+  }, [dispatch, getTitleBlog]);
 
   return (
     <MainContainer>
-      {getContent.map((data) => (
+      {IsLoading && <ContentBlogSkeleton />}
+      {BlogContent.map((data) => (
         <ArticleContent key={data.postID}>
+          <Head>
+            <title>
+              Dandy Candra - Frontend Developer | Blog - {data.titlePost}
+            </title>
+          </Head>
           <ThumbnailImage>
             <Image
               src={data.thumbnail}
@@ -62,8 +77,8 @@ const BlogArticle = () => {
               <Image
                 src={AuthorImg}
                 alt="AuthorImg"
-                width={60}
-                height={55}
+                width={55}
+                height={50}
                 draggable="false"
               />
               <p>{data.Author}</p>
@@ -72,7 +87,18 @@ const BlogArticle = () => {
             </AuthorArticle>
           </TitleArticle>
 
-          <PostContent>{parse(data.Content)}</PostContent>
+          <PostContent>{parse(`${data.Content}`)}</PostContent>
+
+          <DisqusContainer>
+            <DiscussionEmbed
+              shortname="dandycandra"
+              config={{
+                url: `${URL}`,
+                identifier: data.postID,
+                title: data.titlePost,
+              }}
+            />
+          </DisqusContainer>
         </ArticleContent>
       ))}
     </MainContainer>

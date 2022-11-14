@@ -34,10 +34,10 @@ export const Title = styled.div`
     width: 1100px;
     text-align: center;
     margin-top: 0px;
-  }
 
-  span {
-    color: #00c7ff;
+    span {
+      color: #00c7ff;
+    }
   }
 
   @media screen and (min-width: 767px) and (max-width: 1023px) {
@@ -52,7 +52,7 @@ export const Title = styled.div`
   @media screen and (max-width: 766px) {
     width: 370px;
     h1 {
-      font-size: 2.3rem;
+      font-size: 2.2rem;
       width: 370px;
     }
   }
@@ -67,6 +67,7 @@ export const Button = styled.button`
   height: 60px;
   border-radius: 50px;
   border: 3px solid white;
+  transition: 0.5s ease-in-out;
 
   &:hover {
     background-color: #00c7ff;
@@ -74,6 +75,9 @@ export const Button = styled.button`
   }
 
   @media screen and (max-width: 766px) {
+    width: 200px;
+    height: 50px;
+    font-size: 1rem;
     background-color: #000a1f;
     z-index: 1;
   }
@@ -124,6 +128,7 @@ export const FloatingJS = styled(ImageFloating)`
   animation-delay: 0.2s;
 
   @media screen and (max-width: 766px) {
+    right: 67%;
     width: 90px;
     height: 90px;
   }
@@ -147,7 +152,7 @@ export const FloatingDino = styled(ImageFloating)`
   animation-delay: 0.4s;
 
   @media screen and (max-width: 766px) {
-    right: 60%;
+    right: 65%;
     width: 100px;
     height: 100px;
   }
@@ -161,7 +166,7 @@ export const FloatingNext = styled(ImageFloating)`
 
   @media screen and (max-width: 766px) {
     width: 200px;
-    height: 100px;
+    height: 85px;
     margin-bottom: -600px;
   }
 `;

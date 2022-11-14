@@ -23,16 +23,21 @@ export const Wrap = styled.div`
 export const Card = styled.div`
   display: flex;
   flex-direction: column;
+  justify-content: space-around;
   background-color: #000f2e;
   border: 2px solid #009ac5;
   border-radius: 10px;
   padding: 10px;
+  width: 24rem;
+  height: 8rem;
   max-width: 24rem;
   margin-right: 30px;
 
-  h4 {
+  a {
     text-align: center;
-    margin-bottom: 5px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    font-weight: 600;
     cursor: pointer;
 
     &:hover {
@@ -55,6 +60,7 @@ export const BlogDescription = styled.div`
   flex-direction: column;
 
   h2 {
+    text-align: center;
     font-size: 1.3rem;
     margin-bottom: 10px;
     margin-top: 5px;

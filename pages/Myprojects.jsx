@@ -1,6 +1,8 @@
-import Image from 'next/image';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+
+import Head from 'next/head';
+import Image from 'next/image';
 
 import CardSkeleton from '../components/CardSkeleton';
 import SetMyProjects from '../config/redux/action/fetchDataProjects';
@@ -31,6 +33,10 @@ const Myprojects = () => {
 
   return (
     <MainContainer>
+      <Head>
+        <title>Dandy Candra - Frontend Developer | My Projects</title>
+      </Head>
+
       <TitleMyProjects>
         <CodeImage>
           <Image alt="code" src={CodeSvg} width={80} height={80} />

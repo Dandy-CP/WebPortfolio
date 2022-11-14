@@ -13,6 +13,12 @@ export const ContainerIntro = styled.div`
   }
 `;
 
+export const MySelfImg = styled.div`
+  @media screen and (max-width: 766px) {
+    padding: 30px;
+  }
+`;
+
 export const DescIntro = styled.div`
   width: 850px;
   margin-left: 50px;
@@ -20,8 +26,8 @@ export const DescIntro = styled.div`
     font-size: 1.1rem;
     font-weight: 500;
     text-align: justify;
-    text-justify: inter-word;
-    line-height: 1.3;
+    text-justify: inter-character;
+    line-height: 1.5;
   }
 
   @media screen and (min-width: 767px) and (max-width: 1023px) {
@@ -40,11 +46,12 @@ export const ButtonCV = styled.button`
   background-color: transparent;
   color: #00c7ff;
   width: 10rem;
-  height: 40px;
+  height: 50px;
   font-size: 18px;
   border: 1px solid #00c7ff;
-  border-radius: 50px;
+  border-radius: 10px;
   cursor: pointer;
+  transition: 0.5s ease-in-out;
 
   &:hover {
     background-color: #00c7ff;

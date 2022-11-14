@@ -1,4 +1,14 @@
 import Image from 'next/image';
+import Link from 'next/link';
+
+import NextJSLogo from '../../public/images/Icon/NextJS.svg';
+import ReactJSLogo from '../../public/images/Icon/ReactJS.svg';
+import StyledLogo from '../../public/images/Icon/StyledComponents.svg';
+import GithubLogo from '../../public/images/Icon/github-f.svg';
+import GithubLight from '../../public/images/Icon/github.svg';
+import LinkedinLogo from '../../public/images/Icon/linkedin-f.svg';
+import EmailLogo from '../../public/images/Icon/mail-f.svg';
+import SupabaseLogo from '../../public/images/Icon/supabase.svg';
 import {
   ButtonCvNCertif,
   Container,
@@ -20,15 +30,6 @@ import {
   SourceGithub,
 } from '../../styles/Footer/footer.styled';
 
-import NextJSLogo from '../../public/images/Icon/NextJS.svg';
-import ReactJSLogo from '../../public/images/Icon/ReactJS.svg';
-import StyledLogo from '../../public/images/Icon/StyledComponents.svg';
-import SupabaseLogo from '../../public/images/Icon/supabase.svg';
-import GithubLogo from '../../public/images/Icon/github-f.svg';
-import GithubLight from '../../public/images/Icon/github.svg';
-import LinkedinLogo from '../../public/images/Icon/linkedin-f.svg';
-import EmailLogo from '../../public/images/Icon/mail-f.svg';
-
 const Footer = () => {
   return (
     <Container>
@@ -38,9 +39,17 @@ const Footer = () => {
             <h3>PAGES</h3>
           </HeadingFooter>
           <ListPage>
-            <li>Home</li>
-            <li>Project</li>
-            <li>Blog</li>
+            <Link href="/">
+              <li>Home</li>
+            </Link>
+
+            <Link href="/Myprojects">
+              <li>Project</li>
+            </Link>
+
+            <Link href="/Blog">
+              <li>Blog</li>
+            </Link>
           </ListPage>
         </PagesMenu>
 
@@ -49,18 +58,34 @@ const Footer = () => {
             <h3>SOCIAL</h3>
           </HeadingFooter>
           <ListMenu>
-            <List>
-              <Image src={GithubLogo} alt="GithubLogo" width={25} />
-              <li>Github</li>
-            </List>
-            <List>
-              <Image src={LinkedinLogo} alt="LinkedinLogo" width={25} />
-              <li>Linkedin</li>
-            </List>
-            <List>
-              <Image src={EmailLogo} alt="EmailLogo" width={25} />
-              <li>Email</li>
-            </List>
+            <a
+              href="https://github.com/Dandy-CP"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <List>
+                <Image src={GithubLogo} alt="GithubLogo" width={25} />
+                <li>Github</li>
+              </List>
+            </a>
+
+            <a
+              href="https://www.linkedin.com/in/dandycandra/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <List>
+                <Image src={LinkedinLogo} alt="LinkedinLogo" width={25} />
+                <li>Linkedin</li>
+              </List>
+            </a>
+
+            <a href="mailto:dandycandrapratama@gmail.com">
+              <List>
+                <Image src={EmailLogo} alt="EmailLogo" width={25} />
+                <li>Email</li>
+              </List>
+            </a>
           </ListMenu>
         </SocialMedia>
 
@@ -68,8 +93,17 @@ const Footer = () => {
           <HeadingFooter>
             <h3>SEE MY KNOWLEDGE</h3>
           </HeadingFooter>
-          <ButtonCvNCertif>Curiculum Vitae</ButtonCvNCertif>
-          <ButtonCvNCertif>Certificate</ButtonCvNCertif>
+          <a
+            href="https://eyuajzwbnswumrcuzjrd.supabase.co/storage/v1/object/public/certificate/Dandycp_resume.pdf"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <ButtonCvNCertif>My Resume</ButtonCvNCertif>
+          </a>
+
+          <Link href="/Certificate">
+            <ButtonCvNCertif>Certificate</ButtonCvNCertif>
+          </Link>
         </CvAndCertif>
       </Menu>
 
@@ -78,7 +112,9 @@ const Footer = () => {
           <h3>SEE MY KNOWLEDGE</h3>
         </HeadingFooter>
         <ButtonCvNCertif>Curiculum Vitae</ButtonCvNCertif>
-        <ButtonCvNCertif>Certificate</ButtonCvNCertif>
+        <Link href="/Certificate">
+          <ButtonCvNCertif>Certificate</ButtonCvNCertif>
+        </Link>
       </CvNCertifMobile>
 
       <ContainerMade>
@@ -122,14 +158,29 @@ const Footer = () => {
               />
             </Logo>
           </LogoStack>
-          <p>UI and Design inspired by Brayden Wright.</p>
-          <p>Made and Coded by Dandy Candra. All rights reserved.</p>
+          <p>
+            UI and Design inspired by
+            <a href="https://github.com/BraydenTW/braydentw.io">
+              Brayden Wright.
+            </a>
+          </p>
+          <p>
+            Made and Coded by
+            <a href="https://github.com/Dandy-CP">Dandy Candra</a> . All rights
+            reserved.
+          </p>
         </MadeWith>
         <SourceGithub>
-          <SourceButton>
-            <Image src={GithubLight} alt="GithubLogo" width={25} />
-            View Source Code
-          </SourceButton>
+          <a
+            href="https://github.com/Dandy-CP/WebPortfolio"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <SourceButton>
+              <Image src={GithubLight} alt="GithubLogo" width={25} />
+              View Source Code
+            </SourceButton>
+          </a>
         </SourceGithub>
       </ContainerMade>
     </Container>

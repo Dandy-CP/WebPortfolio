@@ -8,6 +8,10 @@ export const LoginContainer = styled.div`
 
 export const LoginForm = styled.div`
   width: 500px;
+  padding: 40px;
+  background-color: #000f2e;
+  border: 2px solid #009ac5;
+  border-radius: 10px;
 `;
 
 export const ContainerDashboard = styled.div`
@@ -15,8 +19,16 @@ export const ContainerDashboard = styled.div`
 `;
 
 export const AdminName = styled.div`
-  text-align: center;
-  font-size: 1.2rem;
+  h1 {
+    text-align: center;
+    font-size: 3rem;
+    margin-bottom: 0px;
+  }
+
+  p {
+    font-size: 1.5rem;
+    text-align: center;
+  }
 `;
 
 export const ButtonAction = styled.div`
@@ -43,4 +55,44 @@ export const PostNewArticle = styled.button`
 
 export const LogOutAdmin = styled(PostNewArticle)`
   margin-left: 20px;
+`;
+
+export const BlogAction = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+
+  p {
+    margin-right: 10px;
+    font-weight: 600;
+    cursor: pointer;
+
+    &:hover {
+      color: #00c7ff;
+    }
+  }
+`;
+
+export const Delete = styled(PostNewArticle)`
+  width: 150px;
+  height: 35px;
+  font-size: 1rem;
+`;
+
+export const EditContent = styled(Delete)`
+  margin-left: 10px;
+`;
+
+export const NotAdmin = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #000f2e;
+  border: 2px solid #009ac5;
+  border-radius: 10px;
+  margin: 150px;
+  padding: 50px;
+
+  h1 {
+    margin-bottom: 50px;
+  }
 `;

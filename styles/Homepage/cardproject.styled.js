@@ -105,6 +105,7 @@ export const ButtonViewAll = styled.button`
   border: 3px solid #00c7ff;
   border-radius: 50px;
   cursor: pointer;
+  transition: 0.5s ease-in-out;
 
   &:hover {
     background-color: #00c7ff;

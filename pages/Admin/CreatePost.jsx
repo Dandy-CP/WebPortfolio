@@ -1,6 +1,9 @@
-import { Editor } from '@tinymce/tinymce-react';
-import Image from 'next/image';
 import React, { useEffect, useRef, useState } from 'react';
+
+import Image from 'next/image';
+import { useRouter } from 'next/router';
+
+import { Editor } from '@tinymce/tinymce-react';
 
 import supabase from '../../config/supabaseClient';
 import { ButtonAction } from '../../styles/AdminPage/AdminPage.styled';
@@ -16,16 +19,12 @@ import { MainContainer } from '../../styles/GlobalStyle';
 
 const NewBlogPost = () => {
   const [Upload, setUpload] = useState([]);
-  const [UploadStatus, setUploadStatus] = useState('Waiting For Image');
+  const [UploadStatus, setUploadStatus] = useState('Waiting For Image...');
+  const [PostStatus, setPostStatus] = useState('Waiting For Post Submit...');
   const [GetImgURL, setGetImgUrl] = useState('');
   const [GetTitleBlog, setGetTitleBlog] = useState('');
   const editorRef = useRef(null);
-
-  /*   const log = () => {
-    if (editorRef.current) {
-      console.log(editorRef.current.getContent());
-    }
-  }; */
+  const router = useRouter();
 
   const HandleFileUpload = async () => {
     const { data, error } = await supabase.storage
@@ -63,11 +62,20 @@ const NewBlogPost = () => {
     if (error) {
       console.log(error);
     }
+
+    setPostStatus(
+      'Content Success Sumbit Redirect to Post Content in 3 Second',
+    );
+
+    setTimeout(() => {
+      router.push(`../Blog/${GetTitleBlog.replace(/ /g, '-')}`);
+    }, 3000);
   };
 
   return (
     <MainContainer>
       <Container>
+        <h1>Post New Content Blog</h1>
         <UploadCover>
           {UploadStatus === 'Upload Success' ? (
             <Image src={GetImgURL} alt="cover" width={500} height={300} />
@@ -100,9 +108,9 @@ const NewBlogPost = () => {
             id="FIXED_ID"
             apiKey="vrvi8n9y59tnkhs7wee1ehekmkpfy2ojmlv4a37o39dhm50r"
             onInit={(evt, editor) => (editorRef.current = editor)}
-            initialValue="<p>Let's goo... start Writing!!!</p>"
+            initialValue="<h1>Write Content Here...</h1>"
             init={{
-              height: 500,
+              height: 800,
               menubar: true,
               plugins: [
                 'advlist',
@@ -123,12 +131,25 @@ const NewBlogPost = () => {
                 'code',
                 'help',
                 'wordcount',
+                'codesample',
+              ],
+              codesample_languages: [
+                { text: 'HTML/XML', value: 'markup' },
+                { text: 'JavaScript', value: 'javascript' },
+                { text: 'CSS', value: 'css' },
+                { text: 'PHP', value: 'php' },
+                { text: 'Ruby', value: 'ruby' },
+                { text: 'Python', value: 'python' },
+                { text: 'Java', value: 'java' },
+                { text: 'C', value: 'c' },
+                { text: 'C#', value: 'csharp' },
+                { text: 'C++', value: 'cpp' },
               ],
               toolbar:
                 'undo redo | blocks | ' +
                 'bold italic forecolor | alignleft aligncenter ' +
                 'alignright alignjustify | bullist numlist outdent indent | ' +
-                'removeformat | help',
+                'removeformat | image | codesample | help',
               content_style:
                 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }',
             }}
@@ -138,6 +159,8 @@ const NewBlogPost = () => {
         <ButtonAction>
           <ButtonPost onClick={HandleSubmitPost}> Post New Content </ButtonPost>
         </ButtonAction>
+
+        <p>{PostStatus}</p>
       </Container>
     </MainContainer>
   );

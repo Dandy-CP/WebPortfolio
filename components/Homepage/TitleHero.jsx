@@ -1,19 +1,20 @@
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 
+import JsSvg from '../../public/images/Doodle/JS.svg';
 import CodeSvg from '../../public/images/Doodle/code2.svg';
 import CssSvg from '../../public/images/Doodle/css.svg';
 import DinoSvg from '../../public/images/Doodle/dino.svg';
 import Fireworks from '../../public/images/Doodle/fireworks.svg';
 import HtmlSvg from '../../public/images/Doodle/html.svg';
-import JsSvg from '../../public/images/Doodle/JS.svg';
 import NextSvg from '../../public/images/Doodle/next.svg';
 import ReactSvg from '../../public/images/Doodle/react2.svg';
 import Sprinkle from '../../public/images/Doodle/sprinkle.svg';
 import {
   Button,
   ContainerHero,
-  FloatingCode,
   FloatingCSS,
+  FloatingCode,
   FloatingDino,
   FloatingHtml,
   FloatingJS,
@@ -24,6 +25,8 @@ import {
 } from '../../styles/Homepage/heroTitle.styled';
 
 const TitleHero = () => {
+  const router = useRouter();
+
   return (
     <ContainerHero>
       <Title>
@@ -51,7 +54,8 @@ const TitleHero = () => {
           I enjoy <span>building</span> and <br /> <span>learning</span> for the
           frontend web.
         </h1>
-        <Button>Tell Me More</Button>
+
+        <Button onClick={() => router.push('/#intro')}>Tell Me More</Button>
 
         <FloatingHtml>
           <Image

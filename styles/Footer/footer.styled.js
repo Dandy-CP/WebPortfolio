@@ -56,6 +56,12 @@ export const ListMenu = styled.ul`
     margin-left: 10px;
     font-size: 1.1rem;
   }
+
+  a {
+    &:hover {
+      color: #00c7ff;
+    }
+  }
 `;
 
 export const ListPage = styled.ul`
@@ -63,8 +69,13 @@ export const ListPage = styled.ul`
   padding-left: 0px;
 
   li {
+    cursor: pointer;
     margin-bottom: 15px;
     font-size: 1.1rem;
+
+    &:hover {
+      color: #00c7ff;
+    }
   }
 `;
 
@@ -110,6 +121,7 @@ export const ButtonCvNCertif = styled.button`
   border: 1px solid #00c7ff;
   border-radius: 10px;
   cursor: pointer;
+  transition: 0.5s ease-in-out;
 
   &:hover {
     background-color: #00c7ff;
@@ -141,6 +153,14 @@ export const MadeWith = styled.div`
     font-size: 0.85rem;
     margin-top: 0px;
     margin-bottom: 5px;
+
+    a {
+      font-weight: 600;
+      margin-left: 3px;
+      &:hover {
+        color: #00c7ff;
+      }
+    }
   }
 
   @media screen and (min-width: 767px) and (max-width: 1023px) {

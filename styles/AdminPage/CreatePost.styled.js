@@ -1,24 +1,49 @@
 import styled from 'styled-components';
 
 export const Container = styled.div`
-  margin-top: 100px;
+  margin-top: 40px;
+
+  p {
+    text-align: center;
+    margin-top: 50px;
+    font-weight: 600;
+    font-size: 1.3rem;
+  }
+
+  h1 {
+    text-align: center;
+    margin-bottom: 100px;
+    font-size: 3rem;
+  }
 `;
 
-export const ContentEditor = styled.div``;
+export const ContentEditor = styled.div`
+  border: 2px solid #009ac5;
+  border-radius: 10px;
+  padding: 5px;
+`;
 
 export const UploadCover = styled.div`
   display: flex;
   flex-direction: column;
   width: 500px;
+  padding: 30px;
   align-items: center;
   margin: 0 auto;
   margin-bottom: 50px;
+  background-color: #000f2e;
+  border: 2px solid #009ac5;
+  border-radius: 10px;
 
   input {
-    margin-top: 50px;
     font-size: 1rem;
     width: 300px;
     text-align: center;
+  }
+
+  p {
+    margin-top: 30px;
+    margin-bottom: 0px;
   }
 `;
 
@@ -49,8 +74,8 @@ export const InputTitle = styled.div`
     height: 50px;
     font-size: 1.2rem;
     text-align: center;
-    border-radius: 50px;
-    border: 3px solid #00c7ff;
+    border-radius: 20px;
+    border: 3px solid #009ac5;
   }
 `;
 
@@ -63,6 +88,7 @@ export const ButtonPost = styled.button`
   height: 60px;
   border-radius: 50px;
   border: 3px solid white;
+  transition: 0.5s ease-in-out;
 
   &:hover {
     background-color: #00c7ff;

@@ -24,7 +24,7 @@ export default function Home() {
     <MainContainer>
       <TitleHero />
 
-      <HeadingIntro>
+      <HeadingIntro id="intro">
         <TextIntroduction>Introduction.</TextIntroduction>
       </HeadingIntro>
 
@@ -50,8 +50,13 @@ export default function Home() {
 
       <EndSection>
         <Image alt="line" src={LineBreak} draggable="false" />
-        <h1>Thats All My Portfolio, Thank You...</h1>
-        <ButtonEmail>Get in Touch</ButtonEmail>
+
+        <h1>Interested in Working Together?</h1>
+
+        <a href="mailto:dandycandrapratama@gmail.com">
+          <ButtonEmail>Get in Touch</ButtonEmail>
+        </a>
+
         <OrnamentImage>
           <Image alt="ornament" src={Ornament} width={1000} draggable="false" />
         </OrnamentImage>

@@ -7,6 +7,13 @@ export const Container = styled.nav`
 
   h3 {
     cursor: pointer;
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+      color: #00c7ff;
+      rotate: 5deg;
+      transform: scale(1.3);
+    }
   }
 
   @media screen and (min-width: 767px) and (max-width: 1023px) {
@@ -66,5 +73,29 @@ export const ActiveLink = styled.a`
 
   &:hover {
     color: white;
+  }
+`;
+
+export const HamburgerMenu = styled.div`
+  display: none;
+
+  @media screen and (max-width: 766px) {
+    display: block;
+    margin-top: 13px;
+    margin-right: 15px;
+  }
+`;
+
+export const ListMenuMobile = styled.div`
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  list-style: none;
+
+  li {
+    a {
+      font-size: 1.5rem;
+      margin-bottom: 30px;
+    }
   }
 `;

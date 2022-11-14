@@ -41,14 +41,16 @@ export const SkillsLogo = styled.div`
 
   @media screen and (max-width: 766px) {
     width: 300px;
-    margin-left: 25px;
+    margin-left: 10px;
   }
 `;
 
 export const Skill = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 15px;
+  margin: 5px;
+  margin-bottom: 25px;
+  width: 85px;
   /* margin-right: 25px; */
   /* margin-bottom: 20px; */
 
