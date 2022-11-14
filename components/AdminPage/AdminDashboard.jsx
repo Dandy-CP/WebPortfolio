@@ -29,6 +29,7 @@ const AdminDashboard = ({ session }) => {
   const user = useUser();
   const [Admin, setAdmin] = useState([]);
   const [Blog, setBlog] = useState([]);
+  const [ErrorStatus, setErrorStatus] = useState('');
 
   async function getProfile() {
     try {
@@ -44,9 +45,10 @@ const AdminDashboard = ({ session }) => {
 
       if (data) {
         setAdmin(data);
+        setErrorStatus('');
       }
     } catch (error) {
-      console.log(error);
+      setErrorStatus('Error While Get Profile');
     }
   }
 
@@ -59,11 +61,12 @@ const AdminDashboard = ({ session }) => {
       const { data, error } = await supabase.from('BlogContentPost').select();
 
       if (error) {
-        console.log(error);
+        setErrorStatus('Error While Fetching Data Blog');
       }
 
       if (data) {
         setBlog(data);
+        setErrorStatus('');
       }
     };
 
@@ -77,7 +80,7 @@ const AdminDashboard = ({ session }) => {
       .eq('titlePost', ID);
 
     if (error) {
-      console.log(error);
+      setErrorStatus('Error While Delete Content');
     }
 
     location.reload();
@@ -89,6 +92,7 @@ const AdminDashboard = ({ session }) => {
         <AdminName>
           <h1>Hi Welcome Back {Admin.full_name}!!!</h1>
           <p>You Can Delete and Edit Your Post Here...</p>
+          <p>{ErrorStatus}</p>
         </AdminName>
 
         {Admin.full_name === 'Dandy Candra Pratama' ? (

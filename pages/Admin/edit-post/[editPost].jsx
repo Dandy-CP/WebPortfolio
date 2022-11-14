@@ -18,6 +18,7 @@ const EditPost = () => {
   const [GetContent, setGetContent] = useState([]);
   const [GetTitleBlog, setGetTitleBlog] = useState('');
   const [PostStatus, setPostStatus] = useState('Waiting For Post Submit...');
+  const [ErrorStatus, setErrorStatus] = useState('');
   const editorRef = useRef(null);
   const router = useRouter();
   const { editPost } = router.query;
@@ -32,11 +33,12 @@ const EditPost = () => {
         .eq('titlePost', `${getTitle}`);
 
       if (error) {
-        console.log(error);
+        setErrorStatus('Error While Fetching Data');
       }
 
       if (data) {
         setGetContent(data);
+        setErrorStatus('');
       }
     };
 
@@ -53,8 +55,10 @@ const EditPost = () => {
       .eq('titlePost', `${getTitle}`);
 
     if (error) {
-      console.log(error);
+      setErrorStatus('Error While Updating Data');
     }
+
+    setErrorStatus('');
 
     setPostStatus(
       'Content Success Sumbit Redirect to Post Content in 3 Second',
@@ -142,6 +146,7 @@ const EditPost = () => {
         </ButtonAction>
 
         <p>{PostStatus}</p>
+        <p>{ErrorStatus}</p>
       </Container>
     </MainContainer>
   );

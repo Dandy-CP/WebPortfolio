@@ -21,6 +21,7 @@ const NewBlogPost = () => {
   const [Upload, setUpload] = useState([]);
   const [UploadStatus, setUploadStatus] = useState('Waiting For Image...');
   const [PostStatus, setPostStatus] = useState('Waiting For Post Submit...');
+  const [ErrorStatus, setErrorStatus] = useState('');
   const [GetImgURL, setGetImgUrl] = useState('');
   const [GetTitleBlog, setGetTitleBlog] = useState('');
   const editorRef = useRef(null);
@@ -36,6 +37,7 @@ const NewBlogPost = () => {
 
     if (error) {
       setUploadStatus(error);
+      setErrorStatus('Error While Uploading Image');
     }
 
     if (data) {
@@ -60,7 +62,7 @@ const NewBlogPost = () => {
     });
 
     if (error) {
-      console.log(error);
+      setErrorStatus('Error While Submit Content');
     }
 
     setPostStatus(
@@ -161,6 +163,7 @@ const NewBlogPost = () => {
         </ButtonAction>
 
         <p>{PostStatus}</p>
+        <p>{ErrorStatus}</p>
       </Container>
     </MainContainer>
   );
