@@ -10,6 +10,7 @@ export const ContainerHero = styled.div`
   margin-bottom: 100px;
 
   @media screen and (max-width: 766px) {
+    margin-top: 30px;
     margin-bottom: 50px;
   }
 `;
@@ -23,7 +24,7 @@ export const Title = styled.div`
   position: relative;
 
   p {
-    font-size: 1.25rem;
+    font-size: 1.1rem;
     font-weight: 500;
     margin-bottom: 20px;
     text-align: center;

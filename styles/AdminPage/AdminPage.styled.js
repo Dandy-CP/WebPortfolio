@@ -7,11 +7,52 @@ export const LoginContainer = styled.div`
 `;
 
 export const LoginForm = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 500px;
   padding: 40px;
   background-color: #000f2e;
   border: 2px solid #009ac5;
   border-radius: 10px;
+
+  input {
+    width: 400px;
+    height: 40px;
+    margin-bottom: 30px;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    font-weight: 500;
+    border: 2px solid white;
+  }
+
+  button {
+    background-color: transparent;
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 600;
+    width: 150px;
+    height: 40px;
+    margin-top: 10px;
+    border-radius: 50px;
+    border: 2px solid white;
+    transition: 0.5s ease-in-out;
+
+    &:hover {
+      background-color: #00c7ff;
+    }
+  }
+
+  h1 {
+    margin-top: 0px;
+    margin-bottom: 50px;
+  }
+
+  p {
+    margin-top: 50px;
+    font-weight: 600;
+    color: red;
+  }
 `;
 
 export const ContainerDashboard = styled.div`

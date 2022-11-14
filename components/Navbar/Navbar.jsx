@@ -1,11 +1,9 @@
 import { useState } from 'react';
 import { stack as Menu } from 'react-burger-menu';
 
-import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 
-import HamburgerIcon from '../../public/images/Icon/MobileHamburger.svg';
 import {
   ActiveLink,
   Container,
@@ -20,10 +18,14 @@ const Navbar = () => {
 
   const styles = {
     bmBurgerButton: {
+      width: '40px',
+      height: '25px',
+      marginTop: '5px',
       position: 'relative',
     },
     bmBurgerBars: {
-      background: '#373a47',
+      background: 'white',
+      borderRadius: '10px',
     },
     bmBurgerBarsHover: {
       background: '#a90000',
@@ -93,9 +95,6 @@ const Navbar = () => {
       <HamburgerMenu>
         <Menu
           styles={styles}
-          customBurgerIcon={
-            <Image src={HamburgerIcon} alt="Menu" width={35} height={30} />
-          }
           width={250}
           isOpen={isOpen}
           onOpen={handleIsOpen}
