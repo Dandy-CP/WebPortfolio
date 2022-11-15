@@ -1,34 +1,108 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+# Personal Web Portfolio With Personal Blog
 
-First, run the development server:
+Hey Everyone !! I'm Dandy Candra and this my Personal Portfolio Website 
+using for show my resume, store my independent projects, and writing My Personal
+Blog.
+
+This website built using Next.JS, Styled Components, and database
+for store My Project and blog is using Supabase.
+
+Link for Demo : https://dandycandra.vercel.app/
+
+UI and Design inspired By [Brayden Wright](https://github.com/braydentw/braydentw.io)
+
+All of doodle is draw by my self using adobe illustrator.
+
+
+
+
+## Tech Stack
+
+**Frontend:** Next JS
+
+**Styling:** Styled Components
+
+**Database:** Supabase
+
+**State Management:** Redux
+
+**Rich Text Editor:** TinyMCE
+
+**Code Highlighting:** Prism
+
+**Comment System:** Disqus
+
+**Mobile Menu:** react-burger-menu
+
+**Deploy:** Vercel
+
+
+## Features
+
+- Lovely UI and Design
+- Store Personal Project
+- Made Your Own Blog
+- Admin Login
+- Add Own Content
+- Edit Posted Content
+- Remove Posted Content
+## Run Locally
+
+Clone the project
 
 ```bash
-npm run dev
-# or
-yarn dev
+  git clone https://github.com/Dandy-CP/WebPortfolio.git
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Go to the project directory
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+```bash
+  cd WebPortfolio
+```
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+Install dependencies
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+```bash
+  npm install
+```
 
-## Learn More
+Start the server
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+  npm run dev
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Installation
 
-## Deploy on Vercel
+You can clone my project and made your website using my Code
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Frist thing frist clone project on my repository
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+made files call ```.env.local```
+
+and copy yours own supabase secret code to ```.env.local``` files
+
+
+```.env.local
+NEXT_PUBLIC_SUPABASE_URL = Your Secrete URL
+NEXT_PUBLIC_SUPABASE_ANON_KEY = Your Secrete Anon Key
+```
+
+On Supabase you can add your Own Table called ```MyProjects``` 
+```BlogContentPost```
+
+On ```MyProjects``` you can add your own column ```ProjectName``` 
+```ProjectDescription``` ```githubLink``` ```demoLink```
+```MyProjects``` ```tagTech``` ```cover```
+
+On ```BlogContentPost``` you can add your own column ```postID```
+```createdAt``` ```thumbnail``` ```Author``` ```titlePost``` ```Content```
+
+On supabase storage you can add your own storage called ```myprojects``` and
+```coverimage```
+
+For Admin page you can visit http://localhost:3000/Admin
+On Admin page you can manage all of yours posted content.
+
