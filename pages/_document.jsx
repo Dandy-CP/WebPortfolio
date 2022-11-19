@@ -34,6 +34,10 @@ export default class MyDocument extends Document {
       <Html lang="en">
         <Head>
           <meta name="Dandy Candra" content="Personal Website Dandy Candra" />
+          <meta
+            name="google-site-verification"
+            content="_EkrtT_5ztdXvdQjG16beqxpxC60lTvtzHdBqjDDnyw"
+          />
           <link rel="icon" href="/favicon.ico" />
           <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link

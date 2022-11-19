@@ -55,9 +55,7 @@ const BlogArticle = () => {
       {BlogContent.map((data) => (
         <ArticleContent key={data.postID}>
           <Head>
-            <title>
-              Dandy Candra - Frontend Developer | Blog - {data.titlePost}
-            </title>
+            <title>{data.titlePost}</title>
           </Head>
           <ThumbnailImage>
             <Image
