@@ -94,7 +94,7 @@ const Footer = () => {
             <h3>SEE MY KNOWLEDGE</h3>
           </HeadingFooter>
           <a
-            href="https://eyuajzwbnswumrcuzjrd.supabase.co/storage/v1/object/public/certificate/Dandycp_resume.pdf"
+            href="https://eyuajzwbnswumrcuzjrd.supabase.co/storage/v1/object/public/certificate/Resume%20Dandy%20Candra%20Pratama.pdf?t=2023-10-01T07%3A38%3A50.788Z"
             target="_blank"
             rel="noreferrer"
           >
