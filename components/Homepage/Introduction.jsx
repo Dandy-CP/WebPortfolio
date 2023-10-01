@@ -25,17 +25,15 @@ const Introduction = () => {
       <DescIntro>
         <Image alt="sprinkle" src={Sprinkle} width={50} draggable="false" />
         <p>
-          I am a Fresh-graduate Telkom University D4 Multimedia Engineering
-          Technology Study Program in 2022. I have the ability to build and
-          design Frontend Websites with the latest technology using HTML, CSS,
-          Javascript and React.JS and also understand Framework and libraries
-          for Frontend. My current activity is actively seeking Frontend Web
-          Developer knowledge and creating independent projects. I have an
-          interest in a career as a Frontend Web Developer and am proficient in
-          building and implementing Functional, Responsive Design of Websites.
+          A Junior Frontend Developer with an experience 1 year until now. Good
+          skills at Javascript and Typescript language with library React.JS and
+          Framework Next.JS up to Mobile Apps with React Native. Interest with
+          Frontend Developer with intermediate skill level, and also interest at
+          anything about design or creativity such as UI/UX Design and Design
+          Graphic.
         </p>
         <a
-          href="https://eyuajzwbnswumrcuzjrd.supabase.co/storage/v1/object/public/certificate/Dandycp_resume.pdf"
+          href="https://eyuajzwbnswumrcuzjrd.supabase.co/storage/v1/object/public/certificate/Resume%20Dandy%20Candra%20Pratama.pdf?t=2023-10-01T07%3A38%3A50.788Z"
           target="_blank"
           rel="noreferrer"
         >
