@@ -6,7 +6,7 @@ export const ContainerHero = styled.div`
   align-items: center;
   justify-content: center;
   height: 50vh;
-  /* margin-top: 90px; */
+  margin-top: 30px;
   margin-bottom: 100px;
 
   @media screen and (max-width: 766px) {
@@ -73,6 +73,7 @@ export const Button = styled.button`
   &:hover {
     background-color: #00c7ff;
     border: 1px solid #00c7ff;
+    cursor: pointer;
   }
 
   @media screen and (max-width: 766px) {
