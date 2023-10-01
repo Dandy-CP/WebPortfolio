@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import { useRouter } from 'next/router';
 
 import JsSvg from '../../public/images/Doodle/JS.svg';
 import CodeSvg from '../../public/images/Doodle/code2.svg';
@@ -25,7 +24,11 @@ import {
 } from '../../styles/Homepage/heroTitle.styled';
 
 const TitleHero = () => {
-  const router = useRouter();
+  const handleSmoothScroll = (IDtag) => {
+    const targetId = IDtag.replace(/.*#/, '');
+    const elem = document.getElementById(targetId);
+    elem.scrollIntoView({ behavior: 'smooth' });
+  };
 
   return (
     <ContainerHero>
@@ -55,7 +58,13 @@ const TitleHero = () => {
           frontend web.
         </h1>
 
-        <Button onClick={() => router.push('/#intro')}>Tell Me More</Button>
+        <Button
+          onClick={() => {
+            handleSmoothScroll('#intro');
+          }}
+        >
+          Tell Me More
+        </Button>
 
         <FloatingHtml>
           <Image
