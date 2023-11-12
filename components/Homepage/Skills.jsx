@@ -2,14 +2,15 @@ import Image from 'next/image';
 
 import CodeSvg from '../../public/images/Doodle/code2.svg';
 import Sprinkle from '../../public/images/Doodle/sprinkle.svg';
-import Css from '../../public/images/Icon/CSS.svg';
 import Figma from '../../public/images/Icon/Figma.svg';
 import Firebase from '../../public/images/Icon/Firebase.svg';
 import Git from '../../public/images/Icon/GIT.svg';
-import Html from '../../public/images/Icon/HTML.svg';
 import Javascript from '../../public/images/Icon/JAVASCRIPT.svg';
+import NestJS from '../../public/images/Icon/NestJS.svg';
 import Next from '../../public/images/Icon/NextJS.svg';
 import React from '../../public/images/Icon/React.svg';
+import Typescript from '../../public/images/Icon/Typescript.svg';
+import Golang from '../../public/images/Icon/golang.svg';
 import SupabaseLogo from '../../public/images/Icon/supabase.svg';
 import {
   ContainerSkill,
@@ -38,22 +39,6 @@ const Skills = () => {
       <SkillsLogo>
         <Skill>
           <Image
-            src={Html}
-            alt="HTML"
-            width={50}
-            height={50}
-            draggable="false"
-          />
-          <p>HTML</p>
-        </Skill>
-
-        <Skill>
-          <Image src={Css} alt="CSS" width={50} height={50} draggable="false" />
-          <p>CSS</p>
-        </Skill>
-
-        <Skill>
-          <Image
             src={Javascript}
             alt="Javascript"
             width={50}
@@ -61,6 +46,28 @@ const Skills = () => {
             draggable="false"
           />
           <p>Javascript</p>
+        </Skill>
+
+        <Skill>
+          <Image
+            src={Typescript}
+            alt="Typescript"
+            width={50}
+            height={50}
+            draggable="false"
+          />
+          <p>Typescript</p>
+        </Skill>
+
+        <Skill>
+          <Image
+            src={Golang}
+            alt="Golang"
+            width={50}
+            height={50}
+            draggable="false"
+          />
+          <p>Golang</p>
         </Skill>
 
         <Skill>
@@ -83,6 +90,17 @@ const Skills = () => {
             draggable="false"
           />
           <p>Next JS</p>
+        </Skill>
+
+        <Skill>
+          <Image
+            src={NestJS}
+            alt="NestJS"
+            width={50}
+            height={50}
+            draggable="false"
+          />
+          <p>Nest JS</p>
         </Skill>
 
         <Skill>
