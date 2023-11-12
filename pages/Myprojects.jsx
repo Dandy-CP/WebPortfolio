@@ -1,14 +1,11 @@
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-
 import Head from 'next/head';
 import Image from 'next/image';
 
 import CardSkeleton from '../components/CardSkeleton';
-import SetMyProjects from '../config/redux/action/fetchDataProjects';
 import CodeSvg from '../public/images/Doodle/code2.svg';
 import DemoLink from '../public/images/Icon/external-link.svg';
 import GithubLink from '../public/images/Icon/github.svg';
+import { GetProjects } from '../service/api/projects/projects.query';
 import { MainContainer } from '../styles/GlobalStyle';
 import {
   Card,
@@ -24,12 +21,10 @@ import {
 } from '../styles/MyProjects/myProjects.styled';
 
 const Myprojects = () => {
-  const { MyProjects, IsLoading } = useSelector((state) => state.MyProjects);
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(SetMyProjects());
-  }, [dispatch]);
+  const { data: MyProjects, isLoading } = GetProjects({
+    sizeData: 10,
+    pageData: 0,
+  });
 
   return (
     <MainContainer>
@@ -43,6 +38,7 @@ const Myprojects = () => {
         </CodeImage>
 
         <h1>Projects</h1>
+
         <p>
           I&apos;ve built dynamic website and slicing static website using
           anything from HTML to React (and even PHP!). Here are some of my
@@ -50,45 +46,56 @@ const Myprojects = () => {
         </p>
       </TitleMyProjects>
 
-      {IsLoading && <CardSkeleton cards={8} />}
+      {isLoading ? (
+        <CardSkeleton cards={8} />
+      ) : (
+        <ContainerMyProjects>
+          {MyProjects?.items.map((list) => (
+            <Card key={list.id}>
+              <CardImageBox>
+                <a href={list.demo_link} target="_blank" rel="noreferrer">
+                  <Image
+                    src={list.project_image}
+                    alt="project"
+                    width={400}
+                    height={250}
+                  />
+                </a>
+              </CardImageBox>
 
-      <ContainerMyProjects>
-        {MyProjects.map((list) => (
-          <Card key={list.id}>
-            <CardImageBox>
-              <a href={list.DemoLink} target="_blank" rel="noreferrer">
-                <Image
-                  src={list.cover}
-                  alt="project"
-                  width={400}
-                  height={250}
-                />
-              </a>
-            </CardImageBox>
-            <ProjectDescription>
-              <h3>
-                {list.projectName}
-                <span>
-                  <a href={list.githubLink} target="_blank" rel="noreferrer">
-                    <Image alt="githubLink" src={GithubLink} />
-                  </a>
-                </span>
-                <span>
-                  <a href={list.DemoLink} target="_blank" rel="noreferrer">
-                    <Image alt="DemoLink" src={DemoLink} />
-                  </a>
-                </span>
-              </h3>
-              <p>{list.projectDescripton}</p>
-              <TagProject>
-                {list.tagTech.map((tag) => (
-                  <p key={tag}>{tag}</p>
-                ))}
-              </TagProject>
-            </ProjectDescription>
-          </Card>
-        ))}
-      </ContainerMyProjects>
+              <ProjectDescription>
+                <h3>
+                  {list.project_name}
+                  <span>
+                    <a
+                      href={list.source_code_link}
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      <Image alt="githubLink" src={GithubLink} />
+                    </a>
+                  </span>
+
+                  <span>
+                    <a href={list.demo_link} target="_blank" rel="noreferrer">
+                      <Image alt="DemoLink" src={DemoLink} />
+                    </a>
+                  </span>
+                </h3>
+
+                <p>{list.description}</p>
+
+                <TagProject>
+                  {list?.tech_stack.map((tag) => (
+                    <p key={tag}>{tag}</p>
+                  ))}
+                </TagProject>
+              </ProjectDescription>
+            </Card>
+          ))}
+        </ContainerMyProjects>
+      )}
+
       <MoreProjects>
         Hey, hey, hey... I&apos;ve got even more on
         <a href="https://github.com/Dandy-CP">my GitHub!</a>

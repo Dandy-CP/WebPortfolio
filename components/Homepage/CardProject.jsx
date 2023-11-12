@@ -1,12 +1,11 @@
-import { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React from 'react';
 
 import Image from 'next/image';
 import Link from 'next/link';
 
-import SetCardProjects from '../../config/redux/action/fetchDataCardProjects';
 import ExternalLink from '../../public/images/Icon/external-link.svg';
 import GithubLink from '../../public/images/Icon/github.svg';
+import { GetProjects } from '../../service/api/projects/projects.query';
 import {
   ButtonViewAll,
   Card,
@@ -19,57 +18,66 @@ import {
 import CardSkeleton from '../CardSkeleton';
 
 const CardProject = () => {
-  const { CardProjects, IsLoading } = useSelector(
-    (state) => state.CardProjects,
-  );
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(SetCardProjects());
-  }, [dispatch]);
+  const { data: MyProjects, isLoading } = GetProjects({
+    sizeData: 10,
+    pageData: 0,
+  });
 
   return (
     <ContainerCard>
       <CardWrap>
-        {IsLoading && <CardSkeleton cards={3} />}
-        {CardProjects.slice(0, 3).map((data) => (
-          <Card key={data.id}>
-            <CardImageBox>
-              <a href={data.DemoLink} target="_blank" rel="noreferrer">
-                <Image
-                  src={data.cover}
-                  alt="project"
-                  width={400}
-                  height={250}
-                />
-              </a>
-            </CardImageBox>
-            <ProjectDescription>
-              <h3>
-                {data.projectName}
-                <span>
-                  <a href={data.githubLink} target="_blank" rel="noreferrer">
-                    <Image alt="githubLink" src={GithubLink} />
+        {isLoading ? (
+          <CardSkeleton cards={3} />
+        ) : (
+          <React.Fragment>
+            {MyProjects?.items?.slice(0, 3).map((list) => (
+              <Card key={list.id}>
+                <CardImageBox>
+                  <a href={list.demo_link} target="_blank" rel="noreferrer">
+                    <Image
+                      src={list.project_image}
+                      alt="project"
+                      width={400}
+                      height={250}
+                    />
                   </a>
-                </span>
-                <span>
-                  <a href={data.DemoLink} target="_blank" rel="noreferrer">
-                    <Image alt="DemoLink" src={ExternalLink} />
-                  </a>
-                </span>
-              </h3>
-              <p>{data.projectDescripton}</p>
-              <TagProject>
-                {data.tagTech.map((tag) => (
-                  <p key={tag}>{tag}</p>
-                ))}
-              </TagProject>
-            </ProjectDescription>
-          </Card>
-        ))}
+                </CardImageBox>
+
+                <ProjectDescription>
+                  <h3>
+                    {list.project_name}
+                    <span>
+                      <a
+                        href={list.source_code_link}
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        <Image alt="githubLink" src={GithubLink} />
+                      </a>
+                    </span>
+
+                    <span>
+                      <a href={list.demo_link} target="_blank" rel="noreferrer">
+                        <Image alt="DemoLink" src={ExternalLink} />
+                      </a>
+                    </span>
+                  </h3>
+
+                  <p>{list.description}</p>
+
+                  <TagProject>
+                    {list?.tech_stack.map((tag) => (
+                      <p key={tag}>{tag}</p>
+                    ))}
+                  </TagProject>
+                </ProjectDescription>
+              </Card>
+            ))}
+          </React.Fragment>
+        )}
       </CardWrap>
 
-      <Link href="/Myprojects">
+      <Link href="/myprojects">
         <ButtonViewAll>View All</ButtonViewAll>
       </Link>
     </ContainerCard>

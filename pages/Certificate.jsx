@@ -1,11 +1,8 @@
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-
 import Head from 'next/head';
 import Image from 'next/image';
 
 import CardSkeleton from '../components/CardSkeleton';
-import SetCertificate from '../config/redux/action/fetchDataCertificate';
+import { GetCertificate } from '../service/api/certificate/certificate.query';
 import {
   CardCertif,
   ContainerCertificate,
@@ -14,14 +11,10 @@ import {
 import { MainContainer } from '../styles/GlobalStyle';
 
 const Certificate = () => {
-  const { MyCertificate, IsLoading } = useSelector(
-    (state) => state.MyCertificate,
-  );
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(SetCertificate());
-  }, []);
+  const { data: MyCertificate, isLoading } = GetCertificate({
+    sizeData: 10,
+    pageData: 0,
+  });
 
   return (
     <MainContainer>
@@ -34,22 +27,24 @@ const Certificate = () => {
         <p>Here are some of my Certificate over the course of my journey.</p>
       </TitleCertificate>
 
-      {IsLoading && <CardSkeleton cards={6} />}
-
-      <ContainerCertificate>
-        {MyCertificate.map((data) => (
-          <CardCertif key={data.id}>
-            <a href={data.urlPdf} target="_blank" rel="noreferrer">
-              <Image
-                src={data.thumbnailPdf}
-                alt="certif"
-                width={350}
-                height={250}
-              />
-            </a>
-          </CardCertif>
-        ))}
-      </ContainerCertificate>
+      {isLoading ? (
+        <CardSkeleton cards={6} />
+      ) : (
+        <ContainerCertificate>
+          {MyCertificate?.items.map((data) => (
+            <CardCertif key={data.id}>
+              <a href={data.url_pdf} target="_blank" rel="noreferrer">
+                <Image
+                  src={data.thumbnail_image}
+                  alt="certif"
+                  width={350}
+                  height={250}
+                />
+              </a>
+            </CardCertif>
+          ))}
+        </ContainerCertificate>
+      )}
     </MainContainer>
   );
 };
