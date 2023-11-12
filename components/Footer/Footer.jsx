@@ -43,7 +43,7 @@ const Footer = () => {
               <li>Home</li>
             </Link>
 
-            <Link href="/Myprojects">
+            <Link href="/myprojects">
               <li>Project</li>
             </Link>
 
@@ -101,7 +101,7 @@ const Footer = () => {
             <ButtonCvNCertif>My Resume</ButtonCvNCertif>
           </a>
 
-          <Link href="/Certificate">
+          <Link href="/certificate">
             <ButtonCvNCertif>Certificate</ButtonCvNCertif>
           </Link>
         </CvAndCertif>
