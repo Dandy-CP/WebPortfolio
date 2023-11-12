@@ -183,7 +183,7 @@ export const LogoStack = styled.div`
 `;
 
 export const Logo = styled.div`
-  margin-right: 10px;
+  margin-right: 15px;
 `;
 
 const LogoRotate = keyframes`
