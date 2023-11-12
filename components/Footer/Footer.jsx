@@ -3,12 +3,11 @@ import Link from 'next/link';
 
 import NextJSLogo from '../../public/images/Icon/NextJS.svg';
 import ReactJSLogo from '../../public/images/Icon/ReactJS.svg';
-import StyledLogo from '../../public/images/Icon/StyledComponents.svg';
 import GithubLogo from '../../public/images/Icon/github-f.svg';
 import GithubLight from '../../public/images/Icon/github.svg';
+import GolangLogo from '../../public/images/Icon/golang.svg';
 import LinkedinLogo from '../../public/images/Icon/linkedin-f.svg';
 import EmailLogo from '../../public/images/Icon/mail-f.svg';
-import SupabaseLogo from '../../public/images/Icon/supabase.svg';
 import {
   ButtonCvNCertif,
   Container,
@@ -141,19 +140,10 @@ const Footer = () => {
             </LogoReact>
             <Logo>
               <Image
-                src={StyledLogo}
-                alt="Styled"
+                src={GolangLogo}
+                alt="golang"
                 width={45}
-                height={60}
-                draggable="false"
-              />
-            </Logo>
-            <Logo>
-              <Image
-                src={SupabaseLogo}
-                alt="Styled"
-                width={25}
-                height={30}
+                height={50}
                 draggable="false"
               />
             </Logo>
