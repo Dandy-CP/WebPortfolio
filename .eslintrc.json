@@ -29,6 +29,9 @@
     "react/no-array-index-key": "off",
     "react-hooks/exhaustive-deps": "off",
     "no-return-assign": "off",
-    "no-restricted-globals": "off"
+    "no-restricted-globals": "off",
+    "import/prefer-default-export": "off",
+    "no-return-await": "off",
+    "react/jsx-no-useless-fragment": "off"
   }
 }
