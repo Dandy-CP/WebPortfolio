@@ -81,7 +81,7 @@ const Navbar = () => {
           </Link>
         </li>
         <li>
-          <Link href="/Myprojects" passHref>
+          <Link href="/myprojects" passHref>
             <ActiveLink pathName={router.pathname}>Project</ActiveLink>
           </Link>
         </li>
