@@ -55,7 +55,7 @@ const TitleHero = () => {
         </p>
         <h1>
           I enjoy <span>building</span> and <br /> <span>learning</span> for the
-          frontend web.
+          Frontend.
         </h1>
 
         <Button
