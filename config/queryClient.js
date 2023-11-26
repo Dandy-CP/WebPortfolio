@@ -7,6 +7,14 @@ export const client = axios.create({
   timeout: 45000,
 });
 
+export function setupToken(token) {
+  if (token) {
+    client.defaults.headers.common.Authorization = `Bearer ${token}`;
+  } else {
+    delete client.defaults.headers.common.Authorization;
+  }
+}
+
 export async function queryFetch({ endpoint, inputParams }) {
   let params = '';
 
@@ -33,13 +41,13 @@ export async function queryFetch({ endpoint, inputParams }) {
   });
 }
 
-export async function mutationFetch({ endpoint, method, body, baseURL }) {
+export async function mutationFetch({ url, method, body, baseURL }) {
   // eslint-disable-next-line no-async-promise-executor
   return new Promise(async (resolve, reject) => {
     try {
       const res = await client.request({
         ...(!!baseURL && { baseURL }),
-        endpoint,
+        url,
         method,
         data: body,
       });
