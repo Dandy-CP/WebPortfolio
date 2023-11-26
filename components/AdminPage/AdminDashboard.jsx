@@ -3,8 +3,9 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { useSupabaseClient, useUser } from '@supabase/auth-helpers-react';
+import { useSupabaseClient } from '@supabase/auth-helpers-react';
 
+import useAuth from '../../hooks/useAuth';
 import {
   AdminName,
   BlogAction,
@@ -13,7 +14,6 @@ import {
   Delete,
   EditContent,
   LogOutAdmin,
-  NotAdmin,
   PostNewArticle,
 } from '../../styles/AdminPage/AdminPage.styled';
 import {
@@ -24,54 +24,25 @@ import {
 } from '../../styles/BlogPage/LatestPost.styled';
 import { MainContainer } from '../../styles/GlobalStyle';
 
-const AdminDashboard = ({ session }) => {
+const AdminDashboard = () => {
   const supabase = useSupabaseClient();
-  const user = useUser();
-  const [Admin, setAdmin] = useState([]);
   const [Blog, setBlog] = useState([]);
   const [ErrorStatus, setErrorStatus] = useState('');
 
-  async function getProfile() {
-    try {
-      const { data, error, status } = await supabase
-        .from('profiles')
-        .select('username, full_name')
-        .eq('id', user.id)
-        .single();
+  const { signOut } = useAuth();
 
-      if (error && status !== 406) {
-        throw error;
-      }
+  const fetchAllBlog = async () => {
+    const { data, error } = await supabase.from('BlogContentPost').select();
 
-      if (data) {
-        setAdmin(data);
-        setErrorStatus('');
-      }
-    } catch (error) {
-      setErrorStatus('Error While Get Profile');
+    if (error) {
+      setErrorStatus('Error While Fetching Data Blog');
     }
-  }
 
-  useEffect(() => {
-    getProfile();
-  }, [session]);
-
-  useEffect(() => {
-    const fetchAllBlog = async () => {
-      const { data, error } = await supabase.from('BlogContentPost').select();
-
-      if (error) {
-        setErrorStatus('Error While Fetching Data Blog');
-      }
-
-      if (data) {
-        setBlog(data);
-        setErrorStatus('');
-      }
-    };
-
-    fetchAllBlog();
-  }, []);
+    if (data) {
+      setBlog(data);
+      setErrorStatus('');
+    }
+  };
 
   const handleDeleteContent = async (ID) => {
     const { error } = await supabase
@@ -86,81 +57,79 @@ const AdminDashboard = ({ session }) => {
     location.reload();
   };
 
+  useEffect(() => {
+    fetchAllBlog();
+  }, []);
+
   return (
     <MainContainer>
       <ContainerDashboard>
         <AdminName>
-          <h1>Hi Welcome Back {Admin.full_name}!!!</h1>
+          <h1>Hi Welcome Back!!!</h1>
           <p>You Can Delete and Edit Your Post Here...</p>
           <p>{ErrorStatus}</p>
         </AdminName>
 
-        {Admin.full_name === 'Dandy Candra Pratama' ? (
-          <>
-            <ButtonAction>
-              <Link href="/Admin/CreatePost">
-                <PostNewArticle>Post New Article</PostNewArticle>
-              </Link>
+        <ButtonAction>
+          <Link href="/admin/CreatePost">
+            <PostNewArticle>Post New Article</PostNewArticle>
+          </Link>
 
-              <LogOutAdmin onClick={() => supabase.auth.signOut()}>
-                Log Out
-              </LogOutAdmin>
-            </ButtonAction>
+          <LogOutAdmin
+            onClick={() => {
+              signOut();
+            }}
+          >
+            Log Out
+          </LogOutAdmin>
+        </ButtonAction>
 
-            <ContainerLatestPost>
-              <LatestPostWrap>
-                {Blog.map((data) => (
-                  <CardPost key={data.postID}>
-                    <Link href={`Blog/${data.titlePost.replace(/ /g, '-')}`}>
-                      <ThumbnailPost>
-                        <Image
-                          src={data.thumbnail}
-                          alt={data.titlePost}
-                          width={350}
-                          height={200}
-                          draggable="false"
-                        />
-                      </ThumbnailPost>
-                    </Link>
-                    <Link href={`Blog/${data.titlePost.replace(/ /g, '-')}`}>
-                      <h1>{data.titlePost}</h1>
-                    </Link>
+        <ContainerLatestPost>
+          <LatestPostWrap>
+            {Blog.map((data) => (
+              <CardPost key={data.postID}>
+                <Link href={`Blog/${data.titlePost.replace(/ /g, '-')}`}>
+                  <ThumbnailPost>
+                    <Image
+                      src={data.thumbnail}
+                      alt={data.titlePost}
+                      width={350}
+                      height={200}
+                      draggable="false"
+                    />
+                  </ThumbnailPost>
+                </Link>
 
-                    <p>
-                      Posted On {data.createdAt.slice(0, 10).replace(/-/g, '/')}
-                    </p>
+                <Link href={`Blog/${data.titlePost.replace(/ /g, '-')}`}>
+                  <h1>{data.titlePost}</h1>
+                </Link>
 
-                    <BlogAction>
-                      <Delete
-                        onClick={() => {
-                          handleDeleteContent(data.titlePost);
-                        }}
-                      >
-                        Delete Content
-                      </Delete>
+                <p>
+                  Posted On {data.createdAt.slice(0, 10).replace(/-/g, '/')}
+                </p>
 
-                      <Link
-                        href={`Admin/edit-post/${data.titlePost.replace(
-                          / /g,
-                          '-',
-                        )}`}
-                      >
-                        <EditContent>Edit Content</EditContent>
-                      </Link>
-                    </BlogAction>
-                  </CardPost>
-                ))}
-              </LatestPostWrap>
-            </ContainerLatestPost>
-          </>
-        ) : (
-          <NotAdmin>
-            <h1>Sorry you are not an admin !!!</h1>
-            <LogOutAdmin onClick={() => supabase.auth.signOut()}>
-              Log Out
-            </LogOutAdmin>
-          </NotAdmin>
-        )}
+                <BlogAction>
+                  <Delete
+                    onClick={() => {
+                      handleDeleteContent(data.titlePost);
+                    }}
+                  >
+                    Delete Content
+                  </Delete>
+
+                  <Link
+                    href={`Admin/edit-post/${data.titlePost.replace(
+                      / /g,
+                      '-',
+                    )}`}
+                  >
+                    <EditContent>Edit Content</EditContent>
+                  </Link>
+                </BlogAction>
+              </CardPost>
+            ))}
+          </LatestPostWrap>
+        </ContainerLatestPost>
       </ContainerDashboard>
     </MainContainer>
   );

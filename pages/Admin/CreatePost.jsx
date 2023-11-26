@@ -3,10 +3,10 @@ import React, { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 
-import { useSession } from '@supabase/auth-helpers-react';
 import { Editor } from '@tinymce/tinymce-react';
 
 import supabase from '../../config/supabaseClient';
+import useAuth from '../../hooks/useAuth';
 import { ButtonAction } from '../../styles/AdminPage/AdminPage.styled';
 import {
   ButtonPost,
@@ -22,25 +22,13 @@ const NewBlogPost = () => {
   const [Upload, setUpload] = useState([]);
   const [UploadStatus, setUploadStatus] = useState('Waiting For Image...');
   const [PostStatus, setPostStatus] = useState('Waiting For Post Submit...');
-  const [LoginStatus, setLoginStatus] = useState('');
   const [ErrorStatus, setErrorStatus] = useState('');
   const [GetImgURL, setGetImgUrl] = useState('');
   const [GetTitleBlog, setGetTitleBlog] = useState('');
   const editorRef = useRef(null);
   const router = useRouter();
-  const session = useSession();
 
-  useEffect(() => {
-    if (session) {
-      setLoginStatus('');
-    } else {
-      setLoginStatus('Youare Not Admin Redirect To Home Page In 3 seconds');
-
-      setTimeout(() => {
-        router.push('/');
-      }, 3000);
-    }
-  }, [session]);
+  const { authData, isAuth } = useAuth();
 
   const HandleFileUpload = async () => {
     const { data, error } = await supabase.storage
@@ -59,14 +47,6 @@ const NewBlogPost = () => {
       setUploadStatus('Upload Success');
     }
   };
-
-  useEffect(() => {
-    const { data } = supabase.storage
-      .from('coverimage')
-      .getPublicUrl(`${Upload.name}`);
-
-    setGetImgUrl(data.publicUrl);
-  }, [Upload]);
 
   const HandleSubmitPost = async () => {
     const { error } = await supabase.from('BlogContentPost').insert({
@@ -89,10 +69,22 @@ const NewBlogPost = () => {
     }, 3000);
   };
 
+  useEffect(() => {
+    isAuth();
+  }, []);
+
+  useEffect(() => {
+    const { data } = supabase.storage
+      .from('coverimage')
+      .getPublicUrl(`${Upload.name}`);
+
+    setGetImgUrl(data.publicUrl);
+  }, [Upload]);
+
   return (
     <MainContainer>
       <Container>
-        {session ? (
+        {authData ? (
           <>
             <h1>Post New Content Blog</h1>
             <UploadCover>
@@ -186,7 +178,7 @@ const NewBlogPost = () => {
             <p>{ErrorStatus}</p>
           </>
         ) : (
-          <h1>{LoginStatus}</h1>
+          <h1>You Not Authenticated</h1>
         )}
       </Container>
     </MainContainer>

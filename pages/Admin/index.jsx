@@ -1,8 +1,10 @@
-import { useState } from 'react';
-
-import { useSession, useSupabaseClient } from '@supabase/auth-helpers-react';
+import { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 
 import AdminDashboard from '../../components/AdminPage/AdminDashboard';
+import { setupToken } from '../../config/queryClient';
+import useAuth from '../../hooks/useAuth';
+import { Login } from '../../service/api/auth/auth.mutation';
 import {
   LoginContainer,
   LoginForm,
@@ -10,34 +12,47 @@ import {
 import { MainContainer } from '../../styles/GlobalStyle';
 
 const Admin = () => {
-  const [mail, setMail] = useState('');
+  const [uname, setUname] = useState('');
   const [pass, setPass] = useState('');
-  const [errorStatus, setErrorStatus] = useState('');
-  const session = useSession();
-  const supabase = useSupabaseClient();
 
-  const signIn = async () => {
-    const { error } = await supabase.auth.signInWithPassword({
-      email: mail,
+  const { authData, signIn, isAuth } = useAuth();
+
+  const { isPending, mutateAsync: funcLogin } = Login({
+    onMutate: () => {
+      toast.info('Please Wait...');
+    },
+    onSuccess: (data) => {
+      signIn(data.access_token);
+      setupToken(data.access_token);
+      toast('Welcome Back...');
+    },
+    onError: (error) => {
+      toast.error(error?.message);
+    },
+  });
+
+  const handleSignIn = async () => {
+    funcLogin({
+      username: uname,
       password: pass,
     });
-
-    if (error) {
-      setErrorStatus(`${error}`);
-    }
   };
+
+  useEffect(() => {
+    isAuth();
+  }, []);
 
   return (
     <MainContainer>
-      {!session ? (
+      {!authData ? (
         <LoginContainer>
           <LoginForm>
             <h1>Admin Login</h1>
             <input
               type="text"
-              placeholder="Enter your email..."
-              value={mail}
-              onChange={(e) => setMail(e.target.value)}
+              placeholder="Username"
+              value={uname}
+              onChange={(e) => setUname(e.target.value)}
             />
 
             <input
@@ -47,15 +62,19 @@ const Admin = () => {
               onChange={(e) => setPass(e.target.value)}
             />
 
-            <button type="button" onClick={signIn}>
+            <button
+              type="button"
+              onClick={() => {
+                handleSignIn();
+              }}
+              disabled={isPending}
+            >
               Sign In
             </button>
-
-            <p>{errorStatus}</p>
           </LoginForm>
         </LoginContainer>
       ) : (
-        <AdminDashboard session={session} />
+        <AdminDashboard />
       )}
     </MainContainer>
   );
